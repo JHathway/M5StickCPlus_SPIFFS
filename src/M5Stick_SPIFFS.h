@@ -55,29 +55,29 @@ bool initSPIFFS()
 //========================================================
 
 /// Add SPIFFS - create an empty file on SD
-/// @param file_name (const String&) name of new file
+/// @param filepath (const String&) name of new file
 /// @return true on success, false on failure
-bool addSPIFFS(const String &file_name)
+bool addSPIFFS(const String &filepath)
 {
     // Check if file exists
-    if (SPIFFS.exists(file_name))
+    if (SPIFFS.exists(filepath))
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": File Already Exists");
+        LOG.println(filepath + ": File Already Exists");
         return false;
     }
 
-    File file = SPIFFS.open(file_name, "w");
+    File file = SPIFFS.open(filepath, "w");
 
     // Check if file opened correctly
     if (!file)
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": Failed to Create File");
+        LOG.println(filepath + ": Failed to Create File");
         return false;
     }
 
-    LOG.print(file_name);
+    LOG.print(filepath);
     LOG.println(": New File Created");
     file.close();
     return true;
@@ -86,26 +86,26 @@ bool addSPIFFS(const String &file_name)
 //========================================================
 
 /// Write SPIFFS - overwrite file data
-/// @param file_name (const String&) name of file
+/// @param filepath (const String&) name of file
 /// @param data (const String&) data to write to file
 /// @return true on success, false on failure
-bool writeSPIFFS(const String &file_name, const String &data)
+bool writeSPIFFS(const String &filepath, const String &data)
 {
     // Check if file exists
-    if (!SPIFFS.exists(file_name))
+    if (!SPIFFS.exists(filepath))
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": File Not Found");
+        LOG.println(filepath + ": File Not Found");
         return false;
     }
 
-    File file = SPIFFS.open(file_name, "w");
+    File file = SPIFFS.open(filepath, "w");
 
     // Check if file opened correctly
     if (!file)
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": Failed to Open File");
+        LOG.println(filepath + ": Failed to Open File");
         return false;
     }
 
@@ -117,26 +117,26 @@ bool writeSPIFFS(const String &file_name, const String &data)
 //========================================================
 
 /// Append SPIFFS - append data to file
-/// @param file_name (const String&) name of file
+/// @param filepath (const String&) name of file
 /// @param data (const String&) data to append to file
 /// @return true on success, false on failure
-bool appendSPIFFS(const String &file_name, const String &data)
+bool appendSPIFFS(const String &filepath, const String &data)
 {
     // Check if file exists
-    if (!SPIFFS.exists(file_name))
+    if (!SPIFFS.exists(filepath))
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": File Not Found");
+        LOG.println(filepath + ": File Not Found");
         return false;
     }
 
-    File file = SPIFFS.open(file_name, "a");
+    File file = SPIFFS.open(filepath, "a");
 
     // Check if file opened correctly
     if (!file)
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": Failed to Open File");
+        LOG.println(filepath + ": Failed to Open File");
         return false;
     }
 
@@ -148,25 +148,25 @@ bool appendSPIFFS(const String &file_name, const String &data)
 //========================================================
 
 /// Read SPIFFS - read data from file
-/// @param file_name (const String&) name of file
+/// @param filepath (const String&) name of file
 /// @return data (String) file contents
-String readSPIFFS(const String &file_name)
+String readSPIFFS(const String &filepath)
 {
     // Check if file exists
-    if (!SPIFFS.exists(file_name))
+    if (!SPIFFS.exists(filepath))
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": File Not Found");
+        LOG.println(filepath + ": File Not Found");
         return "";
     }
 
-    File file = SPIFFS.open(file_name, "r");
+    File file = SPIFFS.open(filepath, "r");
 
     // Check if file opened correctly
     if (!file)
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": Failed to Open File");
+        LOG.println(filepath + ": Failed to Open File");
         return "";
     }
 
@@ -182,18 +182,18 @@ String readSPIFFS(const String &file_name)
 //========================================================
 
 /// Remove SPIFFS - remove a file from SD
-/// @param file_name (const String&) name of new file
+/// @param filepath (const String&) name of new file
 /// @return true on success, false on failure
-bool removeSPIFFS(const String &file_name)
+bool removeSPIFFS(const String &filepath)
 {   
     // Check if file exists
-    if (!SPIFFS.exists(file_name))
+    if (!SPIFFS.exists(filepath))
     {
         LOG.print("ERROR: ");
-        LOG.println(file_name + ": File Not Found");
+        LOG.println(filepath + ": File Not Found");
         return false;
     }
 
-    SPIFFS.remove(file_name);
+    SPIFFS.remove(filepath);
     return true;
 }
