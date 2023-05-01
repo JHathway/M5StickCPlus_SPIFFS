@@ -4,4 +4,4 @@ include/
 lib/
 test/
 platformio.ini
-src/
+src/main.cpp
